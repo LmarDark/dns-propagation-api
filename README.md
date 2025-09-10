@@ -1,66 +1,89 @@
-# DNS Tools API
+# 🌐 DNS Tools API
 
-API para consulta de registros DNS de diversos tipos.
-
-## Endpoints
-
-Todos os endpoints aceitam requisições `POST` com JSON contendo o campo `domain`.
-
-### 1. Consultar registro A
-`POST /api/dns-lookup/a`
-Retorna os registros do tipo A (IPv4).
-
-### 2. Consultar registro MX
-`POST /api/dns-lookup/mx`
-Retorna os registros do tipo MX (Mail Exchange).
-
-### 3. Consultar registro CNAME
-`POST /api/dns-lookup/cname`
-Retorna os registros do tipo CNAME (Canonical Name).
-
-### 4. Consultar registro NS
-`POST /api/dns-lookup/ns`
-Retorna os registros do tipo NS (Name Server).
-
-### 5. Consultar registro TXT
-`POST /api/dns-lookup/txt`
-Retorna os registros do tipo TXT.
-
-### 6. Consultar registro AAAA
-`POST /api/dns-lookup/aaaa`
-Retorna os registros do tipo AAAA (IPv6).
+API RESTful para consulta de registros DNS de diversos tipos, como A, MX, CNAME, NS, TXT e AAAA.
 
 ---
 
-## Parâmetros da Requisição
+## 📌 Visão Geral
 
+A **DNS Tools API** permite consultar, em tempo real, os registros DNS de um domínio, retornando os dados diretamente do servidor DNS (sem cache). Cada tipo de registro possui um endpoint dedicado, acessível via requisições `POST`.
+
+> **Requisitos:** O servidor deve ter suporte à função PHP `dns_get_record`.
+
+---
+
+## 🛣️ Endpoints
+
+Todos os endpoints aceitam requisições `POST` com um corpo JSON contendo o campo `domain`.
+
+| Tipo de Registro | Endpoint                      | Descrição                       |
+|------------------|-------------------------------|---------------------------------|
+| A                | `/api/dns-lookup/a`           | Retorna registros A (IPv4)      |
+| MX               | `/api/dns-lookup/mx`          | Retorna registros MX (Mail Exchange) |
+| CNAME            | `/api/dns-lookup/cname`       | Retorna registros CNAME         |
+| NS               | `/api/dns-lookup/ns`          | Retorna registros NS (Name Server) |
+| TXT              | `/api/dns-lookup/txt`         | Retorna registros TXT           |
+| AAAA             | `/api/dns-lookup/aaaa`        | Retorna registros AAAA (IPv6)   |
+
+---
+
+## 📤 Requisição
+
+### 🔸 Formato
 ```json
 {
-	"domain": "exemplo.com"
+"domain": "exemplo.com"
 }
 ```
-
 - `domain` (string, obrigatório): Domínio a ser consultado.
 
-## Respostas
+---
 
-- **Sucesso:** Array de registros DNS encontrados.
-- **Sem resultados:**  
-	```json
-	{ "message": "No results" }
-	```
+## ✅ Respostas
 
-## Exemplo de Requisição
-
-```bash
-curl -X POST http://localhost:8000/api/dns-lookup/a \
-		 -H "Content-Type: application/json" \
-		 -d '{"domain": "exemplo.com"}'
+### 🔹 Sucesso (200 OK)
+```
+[
+    {
+        "type": "A",
+        "ip": "93.184.216.34"
+    },
+    ...
+]
 ```
 
+### 🔹 Sem resultados (204 ou 200 com mensagem)
+```json
+{
+"message": "No results"
+}
+```
+---
 
-## Informações Adicionais
+## 🧪 Exemplo de Requisição via `curl`
 
-- Esta API foi desenvolvida utilizando o framework Laravel.
-- Para utilizar, é necessário que o servidor tenha suporte à função `dns_get_record` do PHP.
-- Os endpoints retornam os dados diretamente do DNS consultado, sem cache.
+```
+curl -X POST http://localhost:8000/api/dns-lookup/a
+-H "Content-Type: application/json"
+-d '{"domain": "exemplo.com"}'
+```
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+- **Framework:** Laravel (PHP)
+- **Função PHP:** `dns_get_record` (utilizada para realizar as consultas DNS)
+
+---
+
+## ❗ Observações
+
+- Os dados retornados são consultados diretamente dos servidores DNS no momento da requisição.
+- A API **não utiliza cache**, garantindo dados sempre atualizados.
+- Certifique-se de que o domínio informado seja válido e existente.
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a [MIT License](./LICENSE).
