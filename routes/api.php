@@ -4,10 +4,11 @@ use App\Http\Controllers\Api\DnsLookupController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/dns/lookup/')->controller(DnsLookupController::class)->group(function () {
-    Route::post('/a', 'lookup_DNS_A');
-    Route::post('/mx', 'lookup_DNS_MX');
-    Route::post('/cname', 'lookup_DNS_CNAME');
-    Route::post('/ns', 'lookup_DNS_NS');
-    Route::post('/txt', 'lookup_DNS_TXT');
-    Route::post('/aaaa', 'lookup_DNS_AAAA');
+    Route::get('/a', 'lookup_DNS_A');
+    Route::get('/mx', 'lookup_DNS_MX');
+    Route::get('/cname', 'lookup_DNS_CNAME');
+    Route::get('/ns', 'lookup_DNS_NS');
+    Route::get('/txt', 'lookup_DNS_TXT');
+    Route::get('/aaaa', 'lookup_DNS_AAAA');
+    Route::get('/all', 'lookup_DNS_ANY');
 });
