@@ -22,8 +22,18 @@ class DnsLookupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'domain' => 'required|string|regex:/^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/',
+            'domain' => 'required|string|max:255',
             'dnsserver' => 'ip'
         ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [];
     }
 }
