@@ -60,4 +60,13 @@ class DnsLookupController extends Controller
 
         return empty($result) ? response()->json(['message' => 'No results']) : response()->json($result);
     }
+
+    public function lookup_DNS_ANY(DnsLookupRequest $request)
+    {
+        $domain = $request->input('domain');
+
+        $result = dns_get_record($domain, DNS_ANY);
+
+        return empty($result) ? response()->json(['message' => 'No results']) : response()->json($result);
+    }
 }
