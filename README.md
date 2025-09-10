@@ -54,7 +54,7 @@ Todos os endpoints aceitam requisições `POST` com um corpo JSON contendo o cam
 ### 🔹 Sem resultados (204 ou 200 com mensagem)
 ```json
 {
-"message": "No results"
+    "message": "No results"
 }
 ```
 ---
