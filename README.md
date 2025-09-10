@@ -48,7 +48,6 @@ Todos os endpoints aceitam requisições `POST` com um corpo JSON contendo o cam
         "type": "A",
         "ip": "93.184.216.34"
     },
-    ...
 ]
 ```
 
