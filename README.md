@@ -32,7 +32,7 @@ Todos os endpoints aceitam requisições `POST` com um corpo JSON contendo o cam
 ### 🔸 Formato
 ```json
 {
-"domain": "exemplo.com"
+    "domain": "exemplo.com"
 }
 ```
 - `domain` (string, obrigatório): Domínio a ser consultado.
@@ -42,7 +42,7 @@ Todos os endpoints aceitam requisições `POST` com um corpo JSON contendo o cam
 ## ✅ Respostas
 
 ### 🔹 Sucesso (200 OK)
-```
+```json
 [
     {
         "type": "A",
